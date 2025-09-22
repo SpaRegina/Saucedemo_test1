@@ -1,3 +1,4 @@
+// Этот файл содержит автотесты для страницы входа
 package tests;
 
 import org.openqa.selenium.By;
