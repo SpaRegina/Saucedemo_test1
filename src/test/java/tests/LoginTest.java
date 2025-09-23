@@ -1,4 +1,3 @@
-// Этот файл содержит автотесты для страницы входа
 package tests;
 
 import org.openqa.selenium.By;
@@ -14,24 +13,34 @@ import static org.testng.Assert.*;
 
 public class LoginTest extends BaseTest {
 
-    @Test
+    @Test(description = "Проверка корректной авторизации")
     public void testSuccessfulLogin() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
-
-        WebDriverWait wait = new WebDriverWait(browser, Duration.ofSeconds(10));
-        WebElement productsHeader = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='Products']")));
-        assertTrue(productsHeader.isDisplayed(), "Вход не выполнен, заголовок 'Products' не найден.");
+        assertTrue(productsPage.isTitlePresent());
     }
 
-    @Test
+    @Test(description = "Проверка авторизации с заблокированным пользователем")
     public void testLockedOutUserError() {
         loginPage.open();
         loginPage.login("locked_out_user", "secret_sauce");
+        assertEquals(loginPage.checkErrorMsg(), "Epic sadface: Sorry, this user has been locked out.");
+    }
 
-        WebDriverWait wait = new WebDriverWait(browser, Duration.ofSeconds(10));
-        WebElement errorElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h3[data-test='error']")));
-        String expectedError = "Epic sadface: Sorry, this user has been locked out.";
-        assertEquals(errorElement.getText(), expectedError, "Текст ошибки для заблокированного пользователя неверный.");
+    @Test(description = "Проверка ошибки при пустом имени пользователя")
+    public void testLoginWithEmptyUsername() {
+        loginPage.open();
+        loginPage.login("", "secret_sauce");
+        String expectedError = "Epic sadface: Username is required";
+        assertEquals(loginPage.checkErrorMsg(), expectedError, "Текст ошибки для пустого имени пользователя неверный.");
+    }
+
+
+    @Test(description = "Проверка ошибки при пустом пароле")
+    public void testLoginWithEmptyPassword() {
+        loginPage.open();
+        loginPage.login("standard_user", "");
+        String expectedError = "Epic sadface: Password is required";
+        assertEquals(loginPage.checkErrorMsg(), expectedError, "Текст ошибки для пустого пароля неверный.");
     }
 }

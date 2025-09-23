@@ -6,27 +6,31 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import pages.LoginPage;
+import pages.ProductsPage;
 
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
-    public WebDriver browser;
+    public WebDriver driver;
     protected LoginPage loginPage;
+    protected ProductsPage productsPage;
 
     @BeforeMethod
     public void setup() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
         options.addArguments("--guest");
-        browser = new ChromeDriver(options);
+
+        driver = new ChromeDriver(options);
         //   options.addArguments("headless");
-        browser.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
-        loginPage = new LoginPage(browser);
+        driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
+        loginPage = new LoginPage(driver);
+        productsPage = new ProductsPage(driver);
     }
 
     @AfterMethod
     public void close() {
-        browser.quit();
+        driver.quit();
     }
 }
 
