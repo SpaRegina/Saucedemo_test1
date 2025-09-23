@@ -10,7 +10,6 @@ public class ProductsPage extends BasePage {
     private static final String ADD_TO_CART_BUTTON_PATTERN =
             "//*[text() = '%s']//ancestor::div[@class='inventory_item']//child::button[text()='Add to cart']";
 
-
     public ProductsPage(WebDriver driver) {
         super(driver);
     }
@@ -24,11 +23,7 @@ public class ProductsPage extends BasePage {
     }
 
     public void addToCart(String goodsName) {
-        // By addToCart = By.xpath(String.format(ADD_TO_CART_BUTTON_PATTERN, goodsName));
         By addToCart = By.xpath(ADD_TO_CART_BUTTON_PATTERN.formatted(goodsName));
         driver.findElement(addToCart).click();
     }
-
 }
-
-

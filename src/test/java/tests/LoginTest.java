@@ -35,7 +35,6 @@ public class LoginTest extends BaseTest {
         assertEquals(loginPage.checkErrorMsg(), expectedError, "Текст ошибки для пустого имени пользователя неверный.");
     }
 
-
     @Test(description = "Проверка ошибки при пустом пароле")
     public void testLoginWithEmptyPassword() {
         loginPage.open();
