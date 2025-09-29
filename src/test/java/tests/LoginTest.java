@@ -15,7 +15,7 @@ import static org.testng.Assert.*;
 public class LoginTest extends BaseTest {
 
     @Test(description = "Проверка корректной авторизации")
-    public void checkCorrectLogin() throws InterruptedException {
+    public void checkCorrectLogin() {
         loginPage.open();
         loginPage.loginSwagLabs("standard_user", "secret_sauce");
         assertTrue(productsPage.isTitlePresent());

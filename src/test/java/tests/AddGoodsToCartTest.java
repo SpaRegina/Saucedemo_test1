@@ -21,6 +21,5 @@ public class AddGoodsToCartTest extends BaseTest {
         assertTrue(cartPage.getProductsNames().contains("Sauce Labs Backpack"));
         assertEquals(cartPage.getProductsNames(). size(), 3);
         assertFalse(cartPage.getProductsNames().isEmpty());
-        System.out.println(cartPage.getProductsNames() + "!!!");
     }
 }
