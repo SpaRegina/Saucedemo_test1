@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import user.User;
 
 public class LoginPage extends BasePage {
     private static final By LOGIN_INPUT = By.id("user-name");
@@ -21,9 +22,9 @@ public class LoginPage extends BasePage {
         driver.get(BASE_URL + url);
     }
 
-    public void loginSwagLabs(String login, String password) {
-        fillLoginField(login);
-        fillPasswordField(password);
+    public void loginSwagLabs(User user) {
+        fillLoginField(user.getEmail());
+        fillPasswordField(user.getPassword());
         clickSubmit();
     }
 

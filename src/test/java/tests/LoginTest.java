@@ -1,40 +1,38 @@
 package tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import tests.parent.BaseTest;
+import user.User;
+import utils.PropertyReader;
 
-import java.time.Duration;
-
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+import static user.UserFactory.*;
 
 public class LoginTest extends BaseTest {
 
     @Test(description = "Проверка корректной авторизации")
     public void checkCorrectLogin() {
         loginPage.open();
-        loginPage.loginSwagLabs("standard_user", "secret_sauce");
+        loginPage.loginSwagLabs(withAdminPermission());
         assertTrue(productsPage.isTitlePresent());
         assertEquals(productsPage.getTitle(), "Products", "Название заголовка не соответствует ожидаемому.");
     }
 
     @DataProvider()
     public Object[][] loginData() {
-        return new Object[][] {
-                {"locked_out_user", "secret_sauce", "Epic sadface: Sorry, this user has been locked out."},
-                {"", "secret_sauce", "Epic sadface: Username is required"},
-                {"standard_user", "", "Epic sadface: Password is required"}
+        return new Object[][]{
+                {withLockUserPermission(), PropertyReader.getProperty("error.locked")},
+                {withEmptyUsername(), PropertyReader.getProperty("error.empty_username")},
+                {withEmptyPassword(), PropertyReader.getProperty("error.empty_password")}
         };
     }
 
     @Test(dataProvider = "loginData")
-    public void checkIncorrectLogin(String user, String rassword, String errorMsg) {
+    public void checkIncorrectLogin(User user, String errorMsg) {
         loginPage.open();
-        loginPage.loginSwagLabs(user, rassword);
+        loginPage.loginSwagLabs(user);
         assertEquals(loginPage.checkErrorMsg(), errorMsg);
     }
 }

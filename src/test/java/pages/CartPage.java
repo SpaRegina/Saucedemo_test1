@@ -12,13 +12,13 @@ public class CartPage extends BasePage {
         super(driver);
     }
 
-     public ArrayList<String> getProductsNames() {
-         List<WebElement> allproductsNames = driver.findElements(By.cssSelector(".inventory_item_name"));
-         ArrayList<String> names = new ArrayList<>();
-         for (WebElement product : allproductsNames) {
-             names.add(product.getText());
-         }
+    public ArrayList<String> getProductsNames() {
+        List<WebElement> allproductsNames = driver.findElements(By.cssSelector(".inventory_item_name"));
+        ArrayList<String> names = new ArrayList<>();
+        for (WebElement product : allproductsNames) {
+            names.add(product.getText());
+        }
 
-         return names;
+        return names;
     }
 }
