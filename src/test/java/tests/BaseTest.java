@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
@@ -34,11 +33,7 @@ public class BaseTest {
             driver = new ChromeDriver(options);
         } else if (browser.equalsIgnoreCase("edge")) {
             System.setProperty("webdriver.edge.driver", "drivers/msedgedriver.exe");
-            EdgeOptions options = new EdgeOptions();
-            options.addArguments("--start-maximized");
-            options.addArguments("--remote-allow-origins=*");
-            options.addArguments("--disable-blink-features=AutomationControlled");
-            driver = new EdgeDriver(options);
+            driver = new EdgeDriver();
         }
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
