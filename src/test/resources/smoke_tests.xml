@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="2" name="Saucedemo_test1" parallel="classes">
+
+    <test name="All tests">
+        <classes>
+            <class name="tests.LoginTest"/>
+            <class name="tests.AddGoodsToCartTest"/>
+        </classes>
+
+    </test> <!-- Test -->
+
+</suite>
