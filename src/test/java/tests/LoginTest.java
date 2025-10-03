@@ -12,7 +12,7 @@ import static user.UserFactory.*;
 
 public class LoginTest extends BaseTest {
 
-    @Test(description = "Проверка корректной авторизации")
+    @Test(description = "Проверка корректной авторизации", priority = 2)
     public void checkCorrectLogin() {
         loginPage.open();
         loginPage.loginSwagLabs(withAdminPermission());

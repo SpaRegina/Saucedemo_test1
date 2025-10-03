@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import user.User;
@@ -14,6 +15,7 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
+    @Step("Открытие браузера")
     public void open() {
         driver.get(BASE_URL + "/inventory.html");
     }
@@ -22,6 +24,7 @@ public class LoginPage extends BasePage {
         driver.get(BASE_URL + url);
     }
 
+    @Step("Логинимся под кредами пользователя: логин = {user.email}, пароль = ******")
     public void loginSwagLabs(User user) {
         fillLoginField(user.getEmail());
         fillPasswordField(user.getPassword());
