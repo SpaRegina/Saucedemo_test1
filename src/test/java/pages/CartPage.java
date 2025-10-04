@@ -10,6 +10,7 @@ import java.util.List;
 
 public class CartPage extends BasePage {
     private final By productNamesLocator = By.cssSelector(".inventory_item_name");
+    private By pageTitleLocator = By.cssSelector(".title");
 
     public CartPage(WebDriver driver) {
         super(driver);
@@ -22,7 +23,10 @@ public class CartPage extends BasePage {
         for (WebElement product : allproductsNames) {
             names.add(product.getText());
         }
-
         return names;
+    }
+
+    public String getTitle() {
+        return driver.findElement(pageTitleLocator).getText();
     }
 }
