@@ -1,6 +1,9 @@
 # IntelliJ IDEA
 .idea/
 
+# Allure reports and history
+.allure/
+
 # Maven build folder
 target/
 
