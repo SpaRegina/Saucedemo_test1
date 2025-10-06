@@ -6,18 +6,19 @@ import tests.parent.BaseTest;
 import user.User;
 import utils.PropertyReader;
 
+import static enums.DepartmentNaming.*;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static user.UserFactory.*;
 
 public class LoginTest extends BaseTest {
 
-    @Test(description = "Проверка корректной авторизации")
+    @Test(description = "Проверка корректной авторизации", priority = 2)
     public void checkCorrectLogin() {
         loginPage.open();
         loginPage.loginSwagLabs(withAdminPermission());
         assertTrue(productsPage.isTitlePresent());
-        assertEquals(productsPage.getTitle(), "Products", "Название заголовка не соответствует ожидаемому.");
+        assertEquals(productsPage.getTitle(), PRODUCTS.getDisplayName(), "Название заголовка не соответствует ожидаемому.");
     }
 
     @DataProvider()
